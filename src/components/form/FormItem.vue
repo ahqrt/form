@@ -5,7 +5,7 @@
     <slot></slot>
 <!--    校验信息-->
   </div>
-    <p v-if="error" class="error-message"> {{error}}</p>
+  <p v-if="error" class="error-message"> {{error}}</p>
 </template>
 
 <script>

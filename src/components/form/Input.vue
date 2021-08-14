@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import {defineComponent, inject, reactive, watch} from "vue";
-import {FormItemKey, FormKey} from "./token";
+import {defineComponent, inject, watch} from "vue";
+import {FormItemKey} from "./token";
 
 export default defineComponent( {
   name: "Input",
@@ -30,7 +30,6 @@ export default defineComponent( {
   },
   inheritAttrs: false,
   setup(props, context) {
-    const formInstance = inject(FormKey)
     const formItemInstance = inject(FormItemKey)
 
     const handleBlur = event => {
