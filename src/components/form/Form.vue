@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="el-form">
     <slot></slot>
   </div>
 </template>
@@ -53,11 +53,43 @@ export default {
         console.warn( '[Form]model is required for validate to work!')
         return
       }
-      // 遍历所有formItem，执行，获取结果
-      const tasks = fields.filter(item => item.prop).map(item => item.validate())
-    //  统一处理所有的promise 结果
-      console.log(tasks)
-      Promise.all(tasks).then(() => cb(true)).catch(() => cb(false))
+
+      let promise
+
+      // 如果不是函数，进行处理
+      if (typeof cb !== 'function') {
+        promise = new Promise((resolve , reject) => {
+          cb = function (valid, invalidField) {
+            if (valid) {
+              resolve(true)
+            }else {
+              reject(invalidField)
+            }
+          }
+        })
+      }
+
+      if (fields.length === 0) {
+        cb(true)
+      }
+
+
+      let valid = true
+      let count = 0
+      let invalidFields = {}
+
+      for (const field of fields) {
+        field.validate('', (message, field) => {
+          if (message) {
+            valid = false
+          }
+          invalidFields = {...invalidFields, ...field}
+          if (++count === fields.length) {
+            cb(valid, invalidFields)
+          }
+        })
+      }
+      return promise
     }
 
 
@@ -70,6 +102,8 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style lang="less">
+.el-form {
+  font-size: 14px;
+}
 </style>
