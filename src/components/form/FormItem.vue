@@ -11,7 +11,7 @@
 <script>
 import {defineComponent, inject, onMounted, provide, reactive, ref, toRefs} from "vue";
 import {FormEvents, FormItemKey, FormKey} from "./token";
-import mitt  from "mitt";
+import mitt from "mitt";
 import Schema from 'async-validator'
 
 export default defineComponent( {
@@ -35,6 +35,14 @@ export default defineComponent( {
     const formInstance = inject(FormKey)
     const formItemMitt = mitt()
 
+    const getRules = () => {
+      const formRules = formInstance.rules
+
+      return formRules
+    }
+
+
+
     //执行校验
     const validate = () =>  {
       // 获取规则
@@ -47,14 +55,18 @@ export default defineComponent( {
       }
     //  创建校验的实例
       const schema = new Schema(desc)
-      schema.validate({
+
+      let promise
+
+      return schema.validate({
         [props.prop]: value
-      }, errors => {
+      }, {firstFields: true}, (errors, invalidField) => {
         if (errors) {
           error.value = errors[0].message
-        }else {
-        //  校验通过
+          return error.value
+        } else {
           error.value = ''
+          return true
         }
       })
     }

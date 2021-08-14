@@ -22,10 +22,9 @@ export default {
       required: false
     }
   },
+  emits: ['validate'],
   setup(props) {
     const formMitt = mitt()
-    const instance =  getCurrentInstance()
-    console.log('instance', instance)
     const formInstance = reactive({
       formMitt,
       ...toRefs(props)
@@ -55,17 +54,6 @@ export default {
         return
       }
       // 遍历所有formItem，执行，获取结果
-      // if (fields.length === 0) {
-      //   cb(true)
-      // }
-      // let valid = true
-      // let count = 0
-      // let inValidFields = {}
-      // for (const field of fields) {
-      //   field.validate()
-      // }
-      // cb(valid)
-      console.log(fields)
       const tasks = fields.filter(item => item.prop).map(item => item.validate())
     //  统一处理所有的promise 结果
       console.log(tasks)
