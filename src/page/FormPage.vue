@@ -1,13 +1,14 @@
 <template>
-  <Form :model="userModel" :rules="rules">
-    <FormItem label="用户名">
+  <Form :model="userModel" :rules="rules" ref="loginFormRef">
+    <FormItem label="用户名" prop="username">
       <Input v-model="userModel.username" placeholder="请输入用户名"  />
     </FormItem>
-    <FormItem label="密码">
+    <FormItem label="密码" prop="password">
       <Input type="password" v-model="userModel.password"  />
     </FormItem>
   </Form>
-  <h2>{{inputContent}} </h2>
+
+  <button @click="login">登录</button>
 </template>
 
 <script>
@@ -25,6 +26,7 @@ export default defineComponent({
   },
   setup() {
     const inputContent = ref('')
+    const loginFormRef = ref(null)
     const userModel = ref({
       username: '',
       password: ''
@@ -34,13 +36,23 @@ export default defineComponent({
         { required: true, message: '请输入用户名', trigger: 'blur' },
       ],
       password: [
-        { required: true, message: '请输入密码', trigger: 'change' }
+        { required: true, message: '请输入密码', trigger: 'blur' }
       ],
     }
+
+    const login = () => {
+      console.log(loginFormRef)
+      loginFormRef.value.validate(valid => {
+        console.log(valid)
+      })
+    }
+
     return {
       inputContent,
       userModel,
-      rules
+      rules,
+      loginFormRef,
+      login
     }
   }
 })
