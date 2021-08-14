@@ -31,12 +31,23 @@ export default defineComponent({
       username: '',
       password: ''
     })
+
+
+    const validatePass = (rule, value, callback) => {
+      if (!value) {
+        callback(new Error('请输入密码'))
+      }else if (!Number.isInteger(Number(value))) {
+        callback(new Error('密码必须是纯数字'))
+      }else {
+        callback()
+      }
+    }
     const rules =  {
       username: [
         { required: true, message: '请输入用户名', trigger: 'blur' },
       ],
       password: [
-        { required: true, message: '请输入密码', trigger: 'blur' }
+        { required: true,  validator: validatePass, trigger: 'change' }
       ],
     }
 
