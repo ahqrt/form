@@ -46,11 +46,11 @@ export default {
     const selectItems = ref([])
     const  restValueNum = computed(() => selectItems.value.length - 1)
     const selectMitt = mitt()
-    const formItemInstance = inject(FormItemKey)
+    const formItemInstance = inject(FormItemKey, {})
     const handleBlur = (event) => {
       isOpen.value = false;
       if (props.validateEvent) {
-        formItemInstance.formItemMitt?.emit('form.blur', [props.modelValue])
+        formItemInstance?.formItemMitt?.emit('form.blur', [props.modelValue])
       }
       ctx.emit("blur", event);
     }
@@ -81,7 +81,7 @@ export default {
     watch(() => props.modelValue, (newVal) => {
       selectValue.value = newVal
       if (props.validateEvent) {
-        formItemInstance.formItemMitt?.emit('form.change', [newVal])
+        formItemInstance?.formItemMitt?.emit('form.change', [newVal])
       }
     }, {immediate: true})
 

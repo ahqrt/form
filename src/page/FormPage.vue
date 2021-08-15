@@ -17,9 +17,19 @@
     </FormItem>
   </Form>
   <button @click="login">登录</button>
+
+    <div style="margin-top: 20px">
+
+    <Input  v-model="inputContent" placeholder="随便输入点什么"  />
+
+    <Select v-model="selectContent" placeholder="你是谁？" style="margin-top: 10px;">
+      <SelectOption value="user" label="user"> </SelectOption>
+      <SelectOption value="test" label="test"> </SelectOption>
+      <SelectOption value="vip">{{'这是VIP用户'}} </SelectOption>
+      <SelectOption value="admin" label="admin" disabled> </SelectOption>
+    </Select>
+    </div>
   </div>
-
-
 </template>
 
 <script>
@@ -47,6 +57,8 @@ export default defineComponent({
       password: '',
       userType: 'user'
     })
+
+    const selectContent = ref('')
 
 
 
@@ -83,6 +95,7 @@ export default defineComponent({
 
     return {
       inputContent,
+      selectContent,
       userModel,
       rules,
       loginFormRef,

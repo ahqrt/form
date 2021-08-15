@@ -30,11 +30,11 @@ export default defineComponent( {
   },
   inheritAttrs: false,
   setup(props, context) {
-    const formItemInstance = inject(FormItemKey)
+    const formItemInstance = inject(FormItemKey, {})
 
     const handleBlur = event => {
       if (props.validateEvent) {
-        formItemInstance.formItemMitt?.emit('form.blur', [props.modelValue])
+        formItemInstance?.formItemMitt?.emit('form.blur', [props.modelValue])
       }
     }
 
@@ -44,7 +44,7 @@ export default defineComponent( {
 
     watch(() => props.modelValue, newVal => {
       if (props.validateEvent) {
-        formItemInstance.formItemMitt?.emit('form.change', [newVal])
+        formItemInstance?.formItemMitt?.emit('form.change', [newVal])
       }
     })
 
