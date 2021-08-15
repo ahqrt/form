@@ -100,50 +100,6 @@ export default {
     }
   },
 
-  // model: {
-  //   prop: "value",
-  //   event: "input"
-  // },
-  // data() {
-  //   return {
-  //     isOpen: false,
-  //     selectValue: [],
-  //     selectItems: []
-  //   };
-  // },
-  // provide() {
-  //   return {
-  //     fatSelect: this
-  //   };
-  // },
-  // computed: {
-  //   restValueNum() {
-  //     return this.selectItems.length - 1;
-  //   }
-  // },
-  // watch: {
-  //   value: {
-  //     handler(value) {
-  //       const { multiple } = this;
-  //       const init = value ? value : multiple ? [] : "";
-  //       this.selectValue = multiple ? [...init] : init;
-  //     },
-  //     immediate: true
-  //   },
-  //   selectValue: {
-  //     handler(value) {
-  //       this.selectItems = [];
-  //     }
-  //   }
-  // },
-  // methods: {
-  //   handleDelete(item) {
-  //     const { value } = item;
-  //     this.selectValue = this.selectValue.filter(item => item !== value);
-  //     this.$emit("input", this.selectValue);
-  //     this.$emit("change", this.selectValue);
-  //   },
-  // }
 };
 </script>
 
@@ -162,52 +118,17 @@ export default {
   text-overflow: ellipsis;
   outline: none;
   transition: all 0.2s;
+  cursor: pointer;
   &:focus {
     text-overflow: ellipsis;
     border: 1px solid #209cee;
     box-shadow: 0 0 5px 0 rgba(32, 156, 238, 0.5);
   }
-  &.is-disabled {
-    background-color: rgba(192, 196, 204, 0.25);
-    color: #c0c4cc;
-    cursor: not-allowed;
-    &:focus {
-      box-shadow: none;
-      border: 1px solid #ccc;
-    }
-  }
+
   .placeholder {
     color: #999;
   }
-  .select__item__tag {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    margin: 2px 6px 2px 0;
-    padding: 4px 4px;
-    height: 1em;
-    color: #909399;
-    background: #f0f2f5;
-    border-radius: 4px;
-    .delete-btn {
-      margin-left: 4px;
-      border-radius: 50%;
-      color: #fff;
-      background: #c0c4cc;
-      cursor: pointer;
-    }
-  }
-  .arrow {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    margin: auto auto;
-    display: inline-block;
-    align-items: center;
-    width: 14px;
-    height: 14px;
-  }
+
   .select-dropdown {
     position: absolute;
     top: 100%;

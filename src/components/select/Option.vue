@@ -35,10 +35,12 @@ export default {
     })
 
     const  handleSelect =()  => {
-      selectInstance.selectMitt.emit(updateSelectValueKey, props.value)
-      selectInstance.isOpen = false
-      selectInstance.ctx.emit('change', selectInstance.selectValue)
-      selectInstance.ctx.emit('update:modelValue', selectInstance.selectValue)
+      if (!props.disabled){
+        selectInstance.selectMitt.emit(updateSelectValueKey, props.value)
+        selectInstance.isOpen = false
+        selectInstance.ctx.emit('change', selectInstance.selectValue)
+        selectInstance.ctx.emit('update:modelValue', selectInstance.selectValue)
+      }
     }
 
     const handleClick = ()  => {
@@ -48,6 +50,7 @@ export default {
     watch(() => selectInstance.selectValue, (newValue) => {
       const { optionKey } = selectInstance
       const {value, label } = props
+      const showLabel = label ? label : value
       const key = optionKey
       if (
           newValue === value ||
@@ -56,7 +59,7 @@ export default {
         selectInstance.selectItems = [
           {
             key,
-            label,
+            label:showLabel,
             value
           }
         ];

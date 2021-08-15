@@ -9,7 +9,9 @@
     <FormItem label="密码" prop="userType">
       <Select v-model="userModel.userType">
         <SelectOption value="user" label="user"> </SelectOption>
-        <SelectOption value="admin" label="admin"> </SelectOption>
+        <SelectOption value="test" label="test"> </SelectOption>
+        <SelectOption value="vip">{{'这是VIP用户'}} </SelectOption>
+        <SelectOption value="admin" label="admin" disabled> </SelectOption>
       </Select>
     </FormItem>
   </Form>
