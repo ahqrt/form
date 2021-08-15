@@ -7,7 +7,7 @@
     <FormItem label="密码" prop="password">
       <Input  type="password" v-model="userModel.password"  />
     </FormItem>
-    <FormItem label="密码" prop="userType">
+    <FormItem label="用户类型" prop="userType">
       <Select v-model="userModel.userType">
         <SelectOption value="user" label="user"> </SelectOption>
         <SelectOption value="test" label="test"> </SelectOption>
