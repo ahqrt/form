@@ -15,7 +15,7 @@ import mitt from "mitt"
 import Schema from 'async-validator'
 
 export default defineComponent( {
-  name: "form-item",
+  name: "FormItem",
   props:{
     label: {
       type:String,
@@ -75,11 +75,6 @@ export default defineComponent( {
       }
     }
 
-    const removeValidateEvents = () => {
-      formItemMitt.off('form.blur', onFieldBlur)
-      formItemMitt.off('form.change', onFieldChange)
-    }
-
     //执行校验
     const validate = (trigger, callback = NOOP) =>  {
       // 获取规则
@@ -122,9 +117,6 @@ export default defineComponent( {
       if (props.prop) {
         formInstance.formMitt.emit(FormEvents.addField, elFormItemInstance)
       }
-      // formItemMitt.on('validate', () => {
-      //   validate()
-      // })
       addValidateEvents()
     })
 

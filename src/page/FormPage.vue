@@ -6,7 +6,14 @@
     <FormItem label="密码" prop="password">
       <Input  type="password" v-model="userModel.password"  />
     </FormItem>
+    <FormItem label="密码" prop="userType">
+      <Select v-model="userModel.userType">
+        <SelectOption value="user" label="user"> </SelectOption>
+        <SelectOption value="admin" label="admin"> </SelectOption>
+      </Select>
+    </FormItem>
   </Form>
+
 
   <button @click="login">登录</button>
 </template>
@@ -17,20 +24,26 @@ import {defineComponent, ref} from "vue";
 import Input from "../components/form/Input.vue";
 import FormItem from '../components/form/FormItem.vue'
 import Form from "../components/form/Form.vue";
+import Select from '../components/select/Select.vue'
+import SelectOption from '../components/select/Option.vue'
 export default defineComponent({
   name: "FormPage",
   components:{
     Form,
     Input,
-    FormItem
+    FormItem,
+    Select,
+    SelectOption
   },
   setup() {
     const inputContent = ref('')
     const loginFormRef = ref(null)
     const userModel = ref({
       username: '',
-      password: ''
+      password: '',
+      userType: 'user'
     })
+
 
 
     const validatePass = (rule, value, callback) => {
@@ -49,11 +62,18 @@ export default defineComponent({
       password: [
         { required: true,  validator: validatePass, trigger: 'blur' }
       ],
+      userType: [
+        { required: true,   message: '请选择用户类型', trigger: 'blur' }
+      ],
+
     }
 
     const login = () => {
       loginFormRef.value.validate(valid => {
         console.log(valid)
+        if (valid) {
+          console.log(userModel.value)
+        }
       })
     }
 
@@ -62,7 +82,7 @@ export default defineComponent({
       userModel,
       rules,
       loginFormRef,
-      login
+      login,
     }
   }
 })
