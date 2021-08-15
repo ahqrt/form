@@ -1,4 +1,5 @@
 <template>
+  <div class="form-page-container">
   <Form :model="userModel" :rules="rules" ref="loginFormRef">
     <FormItem label="用户名" prop="username" >
       <Input  v-model="userModel.username" placeholder="请输入用户名"  />
@@ -15,9 +16,10 @@
       </Select>
     </FormItem>
   </Form>
-
-
   <button @click="login">登录</button>
+  </div>
+
+
 </template>
 
 <script>
@@ -62,7 +64,7 @@ export default defineComponent({
         { required: true, message: '请输入用户名', trigger: 'blur' },
       ],
       password: [
-        { required: true,  validator: validatePass, trigger: 'blur' }
+        { required: true,  validator: validatePass, trigger: 'change' }
       ],
       userType: [
         { required: true,   message: '请选择用户类型', trigger: 'blur' }
@@ -91,5 +93,8 @@ export default defineComponent({
 </script>
 
 <style scoped>
-
+.form-page-container {
+  margin: 0 auto;
+  width: 400px;
+}
 </style>
